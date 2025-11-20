@@ -92,7 +92,7 @@ int main() {
     // Load Lion 
     std::vector<Vertex> qilinVertices;
     GLuint qilinTexture;
-    if (!loadOBJ("qilin/qilin.obj", qilinVertices, qilinTexture))
+    if (!loadOBJ("models/qilin/qilin.obj", qilinVertices, qilinTexture))
         std::cerr << "Failed to load Qilin OBJ\n";
 
     GLuint VAO_qilin, VBO_qilin;
@@ -112,7 +112,7 @@ int main() {
     // Load Cottage
     std::vector<Vertex> cottageVertices;
     GLuint cottageTexture;
-    if (!loadOBJ("cottage/cottage_obj.obj", cottageVertices, cottageTexture))
+    if (!loadOBJ("models/cottage/cottage_obj.obj", cottageVertices, cottageTexture))
         std::cerr << "Failed to load Cottage OBJ\n";
 
     // Cottage VAO/VBO setup 
@@ -133,7 +133,7 @@ int main() {
     // Load Skull
     std::vector<Vertex> skullVertices;
     GLuint skullTexture;
-    if (!loadOBJ("skull/12140_Skull_v3_L2.obj", skullVertices, skullTexture))
+    if (!loadOBJ("models/skull/12140_Skull_v3_L2.obj", skullVertices, skullTexture))
         std::cerr << "Failed to load Skull OBJ\n";
 
     // Skull VAO/VBO setup 
