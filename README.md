@@ -70,12 +70,16 @@ Links:
 ![Front](Screenshots/light-front.png)
 ![Back](Screenshots/light-back.png)
 
+### Youtube video 
+<a href="https://youtu.be/TD-t1uKz9H0" target="_blank">▶️ Watch on YouTube</a>
+
+
 ## How to link external libraries
 
 
 This guide explains how to link **header-only** and **compiled libraries** in Visual Studio 2022 for your project.
 
-## 1. Lib Libraries (General, in project it's already linked)
+## 1. Lib Libraries 
 
 1. Link GLEW `lib` folder, for example:
 ```
@@ -118,8 +122,10 @@ Now it is in header, but you have to download it in other project.
 
 ---
 
-Last, if you want to start Debug, you have to copy glew32.dll in x64/Debug/project.
+Last, if you want to use Debug, you have to copy glew32.dll in x64/Debug/.
 
 Thanks
 
-copyright Sony
+Copyright Sony
+
+
