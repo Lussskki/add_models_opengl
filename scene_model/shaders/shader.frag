@@ -1,4 +1,4 @@
-﻿#version 330 core
+#version 330 core
 
 in vec3 FragPos;
 in vec3 Normal;
@@ -10,6 +10,7 @@ out vec4 FragColor;
 uniform vec3 lightPos;
 uniform vec3 lightColor;
 uniform vec3 viewPos;
+
 
 uniform sampler2D texture1;
 uniform bool useTexture;
