@@ -24,7 +24,8 @@
 const unsigned int SCR_WIDTH = 1200;
 const unsigned int SCR_HEIGHT = 600;
 
-struct Vertex {
+struct Vertex 
+{
     glm::vec3 Position;
     glm::vec3 Normal;
     glm::vec3 Color;
@@ -38,7 +39,8 @@ bool loadOBJ(const std::string& path, std::vector<Vertex>& outVertices, GLuint& 
 GLuint compileShader(GLenum type, const char* code);
 GLuint createShaderProgram(const char* vertexCode, const char* fragmentCode);
 
-int main() {
+int main() 
+{
     if (!glfwInit()) return -1;
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -63,7 +65,8 @@ int main() {
 
     // Cube 
 
-    float cubeVertices[] = {
+    float cubeVertices[] = 
+    {
         // positions           // colors
         -0.5f,-0.5f,-0.5f,      1,0,0,
          0.5f,-0.5f,-0.5f,      0,1,0,
@@ -137,6 +140,12 @@ int main() {
     //  Shaders  
     std::string vertexCode = readFile("shaders/shader.vert");
     std::string fragmentCode = readFile("shaders/shader.frag");
+
+    // Debug
+    std::cout << "Vertex size: " << vertexCode.size() << "\n";
+    std::cout << "Fragment size: " << fragmentCode.size() << "\n";
+
+    // Shader programm
     GLuint shaderProgram = createShaderProgram(vertexCode.c_str(), fragmentCode.c_str());
 
     // Load Tower
@@ -180,7 +189,8 @@ int main() {
         std::cerr << "Failed to load Qilin OBJ\n";
 
     GLuint VAO_qilin = 0, VBO_qilin = 0;
-    if (!qilinVertices.empty()) {
+    if (!qilinVertices.empty()) 
+    {
         glGenVertexArrays(1, &VAO_qilin);
         glGenBuffers(1, &VBO_qilin);
         glBindVertexArray(VAO_qilin);
@@ -209,7 +219,8 @@ int main() {
         std::cerr << "Failed to load Cottage OBJ\n";
 
     GLuint VAO_cottage = 0, VBO_cottage = 0;
-    if (!cottageVertices.empty()) {
+    if (!cottageVertices.empty()) 
+    {
         glGenVertexArrays(1, &VAO_cottage);
         glGenBuffers(1, &VBO_cottage);
         glBindVertexArray(VAO_cottage);
@@ -238,7 +249,8 @@ int main() {
         std::cerr << "Failed to load Skull OBJ\n";
 
     GLuint VAO_skull = 0, VBO_skull = 0;
-    if (!skullVertices.empty()) {
+    if (!skullVertices.empty()) 
+    {
         glGenVertexArrays(1, &VAO_skull);
         glGenBuffers(1, &VBO_skull);
         glBindVertexArray(VAO_skull);
@@ -282,7 +294,8 @@ int main() {
     glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
     // Render Loop
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(window)) 
+    {
         float currentFrame = glfwGetTime();
         float deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
@@ -328,7 +341,8 @@ int main() {
 
 
         // Draw Watch Tower 
-        if (VAO_tower) {
+        if (VAO_tower) 
+        {
             // 1. Setup Model Matrix (Position, Scale, Rotation)
             glm::mat4 modelTower = glm::translate(glm::mat4(1.0f), towerPos);
             // Rotate the tower to face up (common fix for imported models)
@@ -359,7 +373,8 @@ int main() {
 
 
         // Draw Lion
-        if (VAO_qilin) {
+        if (VAO_qilin) 
+        {
             glm::mat4 modelQilin = glm::translate(glm::mat4(1.0f), qilinPos);
             modelQilin = glm::rotate(modelQilin, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
             modelQilin = glm::rotate(modelQilin, glm::radians(360.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -384,7 +399,8 @@ int main() {
         }
 
         // Draw Cottage
-        if (VAO_cottage) {
+        if (VAO_cottage) 
+        {
             glm::mat4 modelCottage = glm::translate(glm::mat4(1.0f), cottagePos);
             modelCottage = glm::scale(modelCottage, glm::vec3(cottageScale));
             modelCottage = glm::rotate(modelCottage, glm::radians(80.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -407,7 +423,8 @@ int main() {
         }
 
         // Draw Skull  
-        if (VAO_skull) {
+        if (VAO_skull) 
+        {
             glm::mat4 modelSkull = glm::translate(glm::mat4(1.0f), skullPos);
             modelSkull = glm::rotate(modelSkull, glm::radians(-90.0f), glm::vec3(2.0f, 0.0f, 0.0f));
             modelSkull = glm::rotate(modelSkull, glm::radians(360.0f), glm::vec3(0.0f, 0.0f, 1.0f));
@@ -450,7 +467,8 @@ int main() {
 }
 
 // Helper Function Definitions
-std::string readFile(const std::string& path) {
+std::string readFile(const std::string& path) 
+{
     std::ifstream file(path);
     if (!file) {
         std::cerr << "Failed to open file: " << path << "\n";
@@ -461,7 +479,8 @@ std::string readFile(const std::string& path) {
     return ss.str();
 }
 
-GLuint loadTexture(const std::string& path) {
+GLuint loadTexture(const std::string& path) 
+{
     GLuint textureID = 0;
     glGenTextures(1, &textureID);
     int width, height, nrChannels;
@@ -486,7 +505,8 @@ GLuint loadTexture(const std::string& path) {
     return textureID;
 }
 
-bool loadOBJ(const std::string& path, std::vector<Vertex>& outVertices, GLuint& outTexture) {
+bool loadOBJ(const std::string& path, std::vector<Vertex>& outVertices, GLuint& outTexture) 
+{
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> materials;
@@ -494,14 +514,16 @@ bool loadOBJ(const std::string& path, std::vector<Vertex>& outVertices, GLuint& 
     std::string baseDir = path.substr(0, path.find_last_of("/\\") + 1);
 
     bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, path.c_str(), baseDir.c_str(), true);
-    if (!ret) {
+    if (!ret) 
+    {
         std::cerr << "Failed to load OBJ: " << err << std::endl;
         return false;
     }
     if (!warn.empty()) std::cout << "OBJ Warning: " << warn << std::endl;
 
     outTexture = 0;
-    if (!materials.empty() && !materials[0].diffuse_texname.empty()) {
+    if (!materials.empty() && !materials[0].diffuse_texname.empty()) 
+    {
         std::string texturePath = baseDir + materials[0].diffuse_texname;
         outTexture = loadTexture(texturePath);
         if (outTexture == 0) std::cout << "Texture '" << materials[0].diffuse_texname << "' not found, using vertex colors\n";
@@ -513,9 +535,11 @@ bool loadOBJ(const std::string& path, std::vector<Vertex>& outVertices, GLuint& 
 
     bool hasNormals = !attrib.normals.empty();
     // iterate shapes/faces
-    for (const auto& shape : shapes) {
+    for (const auto& shape : shapes) 
+    {
         size_t index_offset = 0;
-        for (size_t f = 0; f < shape.mesh.num_face_vertices.size(); f++) {
+        for (size_t f = 0; f < shape.mesh.num_face_vertices.size(); f++) 
+        {
             int fv = shape.mesh.num_face_vertices[f];
             int matID = (shape.mesh.material_ids.size() > f) ? shape.mesh.material_ids[f] : -1;
             glm::vec3 faceColor(0.8f, 0.8f, 0.8f);
@@ -525,7 +549,8 @@ bool loadOBJ(const std::string& path, std::vector<Vertex>& outVertices, GLuint& 
 
             // If normals are missing, compute the face normal using first 3 vertices.
             glm::vec3 computedNormal(0.0f);
-            if (!hasNormals && fv >= 3) {
+            if (!hasNormals && fv >= 3) 
+            {
                 tinyobj::index_t idx0 = shape.mesh.indices[index_offset + 0];
                 tinyobj::index_t idx1 = shape.mesh.indices[index_offset + 1];
                 tinyobj::index_t idx2 = shape.mesh.indices[index_offset + 2];
@@ -556,7 +581,8 @@ bool loadOBJ(const std::string& path, std::vector<Vertex>& outVertices, GLuint& 
                     attrib.vertices[3 * idx.vertex_index + 2]
                 };
 
-                if (idx.normal_index >= 0 && hasNormals) {
+                if (idx.normal_index >= 0 && hasNormals) 
+                {
                     vertex.Normal = {
                         attrib.normals[3 * idx.normal_index + 0],
                         attrib.normals[3 * idx.normal_index + 1],
@@ -569,7 +595,8 @@ bool loadOBJ(const std::string& path, std::vector<Vertex>& outVertices, GLuint& 
 
                 vertex.Color = faceColor;
 
-                if (idx.texcoord_index >= 0 && !attrib.texcoords.empty()) {
+                if (idx.texcoord_index >= 0 && !attrib.texcoords.empty()) 
+                {
                     vertex.TexCoords = {
                         attrib.texcoords[2 * idx.texcoord_index + 0],
                         attrib.texcoords[2 * idx.texcoord_index + 1]
@@ -602,7 +629,8 @@ GLuint compileShader(GLenum type, const char* code) {
     return shader;
 }
 
-GLuint createShaderProgram(const char* vertexCode, const char* fragmentCode) {
+GLuint createShaderProgram(const char* vertexCode, const char* fragmentCode)
+ {
     GLuint vertexShader = compileShader(GL_VERTEX_SHADER, vertexCode);
     GLuint fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragmentCode);
     GLuint program = glCreateProgram();
@@ -619,4 +647,28 @@ GLuint createShaderProgram(const char* vertexCode, const char* fragmentCode) {
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
     return program;
+}
+
+std::string LoadShaderFile(const std::string& path)
+{
+    std::ifstream file(path, std::ios::binary);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open shader: " << path << std::endl;
+        return "";
+    }
+
+    std::string content((std::istreambuf_iterator<char>(file)),
+        std::istreambuf_iterator<char>());
+
+    // Detect UTF-8 BOM: EF BB BF
+    if (content.size() >= 3 &&
+        (unsigned char)content[0] == 0xEF &&
+        (unsigned char)content[1] == 0xBB &&
+        (unsigned char)content[2] == 0xBF)
+    {
+        std::cout << "[Shader Loader] BOM detected and removed in: " << path << std::endl;
+        content.erase(0, 3);
+    }
+
+    return content;
 }
